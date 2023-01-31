@@ -1,0 +1,29 @@
+name: Build and Push Docker Image with Podman
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  DOCKER_REGISTRY: docker.io
+  IMAGE_NAME: myimage
+  IMAGE_TAG: ${{ env.GITHUB_SHA }}
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build Docker Image with Podman
+      run: |
+        cd result
+        podman build -t ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} .
+
+    - name: Push Docker Image with Podman
+      run: |
+        cd vote
+        podman push ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
