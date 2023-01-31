@@ -27,18 +27,18 @@ jobs:
       run: |
         cd vote/
         podman build -t vote:v3 .
-        podman push vote:v3 ${{DOCKER_REPOSITORY}}:v3
+        podman push vote:v3 ${{ env.DOCKER_REPOSITORY }}:v3
         
     - name: Result Application Build Image Using Podman
       run: |
         cd result/
         podman build -t result:r3 .
-        podman push result:r3 ${{DOCKER_REPOSITORY}}:r3
+        podman push result:r3 ${{ env.DOCKER_REPOSITORY }}:r3
   
 
     - name: Worker Application Build Image Using Podman
       run: |
         cd worker/
         podman build -t worker:w3 .
-        podman push worker:w3 ${{DOCKER_REPOSITORY}}:w3
+        podman push worker:w3 ${{ env.DOCKER_REPOSITORY }}:w3
         
