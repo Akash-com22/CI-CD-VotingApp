@@ -7,8 +7,8 @@ on:
 
 env:
   DOCKER_REGISTRY: docker.io
-  IMAGE_NAME: myimage
-  IMAGE_TAG: ${{ env.GITHUB_SHA }}
+  DOCKER_USERNAME: akashkam
+  DOCKER_REPOSITORY: akashkam/podman
 
 jobs:
   build:
@@ -18,12 +18,27 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Build Docker Image with Podman
+    - name: Login to Docker registry by Podman
       run: |
-        cd result
-        podman build -t ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} .
+        podman login  "${{ env.DOCKER_REGISTRY }}" -u "${{ env.DOCKER_USERNAME }}" --p Kamble@22
 
-    - name: Push Docker Image with Podman
+
+    - name: Voting Application Build Image Using Podman
       run: |
-        cd vote
-        podman push ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+        cd vote/
+        podman build -t ${{ env.DOCKER_REGISTRY }}/vote:v3 .
+        podman push ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_REPOSITORY }}:v3
+        
+    - name: Result Application Build Image Using Podman
+      run: |
+        cd result/
+        podman build -t ${{ env.DOCKER_REGISTRY }}/result:r3 .
+        podman push ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_REPOSITORY }}:r3
+  
+
+    - name: Worker Application Build Image Using Podman
+      run: |
+        cd worker/
+        podman build -t ${{ env.DOCKER_REGISTRY }}/worker:w3 .
+        podman push ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_REPOSITORY }}:w3
+        
