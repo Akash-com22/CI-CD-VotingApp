@@ -42,3 +42,9 @@ jobs:
         podman build -t worker:w3 .
         podman push worker:w3 ${{ env.DOCKER_REPOSITORY }}:w3
         
+    - name: Connect to AKS Cluster
+      run: |
+        az account set --subscription 95dc6442-7e4b-48c8-8960-9e89c991c067
+        az aks get-credentials --resource-group RG-Containerization2 --name akscluster-002
+        kubectl get pods
+        
