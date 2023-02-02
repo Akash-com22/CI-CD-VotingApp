@@ -9,7 +9,7 @@ env:
   DOCKER_REGISTRY: docker.io/akashkam/podman
   DOCKER_USERNAME: akashkam
   IMAGE_NAME: myimage
-  IMAGE_TAG: ${{ env.GITHUB_SHA }}
+  IMAGE_TAG: ${{ github.run_number }}
 
 jobs:
   build:
