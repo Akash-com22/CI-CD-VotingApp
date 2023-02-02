@@ -24,15 +24,15 @@ jobs:
 
     - name: Voting Application Build Image using podman
       run: |
-        podman build -t vote:${{ env.IMAGE_TAG }} vote/.
-        podman push vote:${{ env.IMAGE_TAG }}
+        sudo podman build -t vote:${{ env.IMAGE_TAG }} vote/.
+        sudo podman push vote:${{ env.IMAGE_TAG }}
         
     - name: Result Application Build Image using podman
       run: |
-        podman build -t result:${{ env.IMAGE_TAG }} result/.
-        podman push result:${{ env.IMAGE_TAG }}
+        sudo podman build -t result:${{ env.IMAGE_TAG }} result/.
+        sudo podman push result:${{ env.IMAGE_TAG }}
   
     - name: Worker Application Build Image using podman
       run: |
-        podman build -t worker:${{ env.IMAGE_TAG }} worker/.
-        podman push worker:${{ env.IMAGE_TAG }}
+        sudo podman build -t worker:${{ env.IMAGE_TAG }} worker/.
+        sudo podman push worker:${{ env.IMAGE_TAG }}
