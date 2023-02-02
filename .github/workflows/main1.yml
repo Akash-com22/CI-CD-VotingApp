@@ -24,15 +24,15 @@ jobs:
 
     - name: Voting Application Build Image using podman
       run: |
-        sudo podman build -t vote:v1 vote/.
-        sudo podman push vote:v1
+        podman build -t vote:v1 vote/.
+        podman push vote:v1
         
     - name: Result Application Build Image using podman
       run: |
-        sudo podman build -t result:r4 result/.
-        sudo podman push result:r4
+        podman build -t result:r4 result/.
+        podman push result:r4
   
     - name: Worker Application Build Image using podman
       run: |
-        sudo podman build -t worker:w4 worker/.
-        sudo podman push worker:w4
+        podman build -t worker:w4 worker/.
+        podman push worker:w4
