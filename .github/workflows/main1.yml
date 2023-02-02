@@ -1,4 +1,4 @@
-name: Sampleak
+name: Sample
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 env:
   DOCKER_REGISTRY: docker.io/akashkam/podman
   DOCKER_USERNAME: akashkam
-#   IMAGE_TAG: ${{ GITHUB_SHA }}
+
 
 jobs:
   build:
