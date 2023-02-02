@@ -26,21 +26,21 @@ jobs:
     - name: Voting Application Build Image Using Podman
       run: |
         cd vote/
-        podman build -t vote:{{ GITHUB_SHA }} .
-        podman push vote:v3 ${{ env.DOCKER_REPOSITORY }}:{{ GITHUB_SHA }}
+        podman build -t vote:${{ GITHUB_SHA }} .
+        podman push vote:v3 ${{ env.DOCKER_REPOSITORY }}:${{ GITHUB_SHA }}
         
     - name: Result Application Build Image Using Podman
       run: |
         cd result/
-        podman build -t result:{{ GITHUB_SHA }} .
-        podman push result:r3 ${{ env.DOCKER_REPOSITORY }}:{{ GITHUB_SHA }}
+        podman build -t result:${{ GITHUB_SHA }} .
+        podman push result:r3 ${{ env.DOCKER_REPOSITORY }}:${{ GITHUB_SHA }}
   
 
     - name: Worker Application Build Image Using Podman
       run: |
         cd worker/
-        podman build -t worker:{{ GITHUB_SHA }} .
-        podman push worker:w3 ${{ env.DOCKER_REPOSITORY }}:{{ GITHUB_SHA }}
+        podman build -t worker:${{ GITHUB_SHA }} .
+        podman push worker:w3 ${{ env.DOCKER_REPOSITORY }}:${{ GITHUB_SHA }}
         
 #     - name: Connect to AKS Cluster
 #       run: |
