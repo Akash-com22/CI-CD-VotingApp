@@ -26,25 +26,25 @@ jobs:
     - name: Voting Application Build Image Using Podman
       run: |
         cd vote/
-        podman build -t vote:v3 .
-        podman push vote:v3 ${{ env.DOCKER_REPOSITORY }}:v3
+        podman build -t vote:{{ GITHUB_SHA }} .
+        podman push vote:v3 ${{ env.DOCKER_REPOSITORY }}:{{ GITHUB_SHA }}
         
     - name: Result Application Build Image Using Podman
       run: |
         cd result/
-        podman build -t result:r3 .
-        podman push result:r3 ${{ env.DOCKER_REPOSITORY }}:r3
+        podman build -t result:{{ GITHUB_SHA }} .
+        podman push result:r3 ${{ env.DOCKER_REPOSITORY }}:{{ GITHUB_SHA }}
   
 
     - name: Worker Application Build Image Using Podman
       run: |
         cd worker/
-        podman build -t worker:w3 .
-        podman push worker:w3 ${{ env.DOCKER_REPOSITORY }}:w3
+        podman build -t worker:{{ GITHUB_SHA }} .
+        podman push worker:w3 ${{ env.DOCKER_REPOSITORY }}:{{ GITHUB_SHA }}
         
-    - name: Connect to AKS Cluster
-      run: |
-        az account set --subscription 95dc6442-7e4b-48c8-8960-9e89c991c067
-        az aks get-credentials --resource-group RG-Containerization2 --name akscluster-002
-        kubectl get pods
+#     - name: Connect to AKS Cluster
+#       run: |
+#         az account set --subscription 95dc6442-7e4b-48c8-8960-9e89c991c067
+#         az aks get-credentials --resource-group RG-Containerization2 --name akscluster-002
+#         kubectl get pods
         
