@@ -29,10 +29,10 @@ jobs:
         
     - name: Result Application Build Image using podman
       run: |
-        sudo podman build -t result:${{ env.IMAGE_TAG }} result/.
-        sudo podman push result:${{ env.IMAGE_TAG }}
+        sudo podman build -t result:r4 result/.
+        sudo podman push result:r4
   
     - name: Worker Application Build Image using podman
       run: |
-        sudo podman build -t worker:${{ env.IMAGE_TAG }} worker/.
-        sudo podman push worker:${{ env.IMAGE_TAG }}
+        sudo podman build -t worker:w4 worker/.
+        sudo podman push worker:w4
